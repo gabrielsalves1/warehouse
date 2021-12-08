@@ -5,7 +5,8 @@ describe 'Visitante abre a tela inicial' do
   it 'e vê o menu' do
     visit root_path
 
-    expect(page).to have_content 'Boas vindas ao WareHouse App'
+    expect(page).to have_css('h1', text: 'WareHouse App')
+    expect(page).to have_css('h3', text: 'Boas vindas ao sistema de gestão de estoques')
   end
 
   it 'e vê os galpões cadastrados' do
@@ -15,6 +16,7 @@ describe 'Visitante abre a tela inicial' do
     Warehouse.new(name: 'Vitória', code: 'VIX').save()
 
     visit root_path
+    expect(page).to have_content('Galpões cadastrados')
     expect(page).to have_content('Guarulhos')
     expect(page).to have_content('GRU')
 
