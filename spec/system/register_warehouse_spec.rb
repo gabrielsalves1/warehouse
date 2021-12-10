@@ -49,4 +49,23 @@ describe 'Visitante registra galpão' do
     expect(page).to have_content('Área Total: 5000 m2')
     expect(page).to have_content('Área Útil: 3000 m2')
   end
+
+  it 'e todos campos são obrigatórios' do
+    # Arrange
+
+    # Act
+    visit root_path
+    click_on 'Cadastrar novo galpão'
+    fill_in 'Nome', with: ''
+    fill_in 'Código', with: ''
+    fill_in 'Endereço', with: ''
+    click_on 'Gravar'
+
+    # Assert
+    expect(page).to_not have_content 'Galpão registrado com sucesso'
+    expect(page).to have_content 'Não foi possível gravar o galpão'
+    expect(page).to have_content 'Nome não pode ficar em branco'
+    expect(page).to have_content 'Código não pode ficar em branco'
+    expect(page).to have_content 'Endereço não pode ficar em branco'
+  end
 end

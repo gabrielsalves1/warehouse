@@ -10,10 +10,10 @@ describe 'Visitante abre a tela inicial' do
   end
 
   it 'e vê os galpões cadastrados' do
-    Warehouse.new(name: 'Guarulhos', code: 'GRU').save()
-    Warehouse.new(name: 'Porto Alegre', code: 'POA').save()
-    Warehouse.new(name: 'São Luís', code: 'SLZ').save()
-    Warehouse.new(name: 'Vitória', code: 'VIX').save()
+    Warehouse.new(name: 'Guarulhos', code: 'GRU', description: 'Teste cadastrar galpão', address: 'Rua Teste', city: 'Guarulhos',
+                  state: 'SP', postal_code: '00000-000', total_area: '3000', useful_area: '2000').save()
+    Warehouse.new(name: 'Porto Alegre', code: 'POA', description: 'Teste cadastrar galpão', address: 'Rua Teste', city: 'Porto Alegre',
+                  state: 'RS', postal_code: '00000-000', total_area: '4000', useful_area: '3500').save()
 
     visit root_path
     expect(page).to have_content('Galpões cadastrados')
@@ -22,11 +22,5 @@ describe 'Visitante abre a tela inicial' do
 
     expect(page).to have_content('Porto Alegre')
     expect(page).to have_content('POA')
-
-    expect(page).to have_content('São Luís')
-    expect(page).to have_content('SLZ')
-
-    expect(page).to have_content('Vitória')
-    expect(page).to have_content('VIX')
   end
 end
