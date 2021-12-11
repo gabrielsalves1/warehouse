@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      provider: Fornecedor
+    attributes:
+      provider:
+        fantasy_name: 'Nome Fantasia'
+        corporate_name: 'Razão Social'
+        cnpj: 'CNPJ'
+        email: 'E-mail'
+        product: 'Produto'
+        telephone: 'Telefone'
