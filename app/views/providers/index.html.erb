@@ -1,0 +1,4 @@
+<h2>Fornecedores cadastrados</h2>
+<% @provider.each do |p|%>
+    <%= link_to(p.fantasy_name, provider_path(p.id)) %>
+<% end %>

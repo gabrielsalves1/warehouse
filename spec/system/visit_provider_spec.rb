@@ -7,7 +7,7 @@ describe 'Visitante vê um fornecedor' do
                     email: 'emailfake@gmail.com', product: 'Fornecedor de materiais diversos', telephone: '(11) 00000-0000')
 
     #Act
-    visit root_path
+    visit providers_path
     click_on 'Fornecedor X'
 
     #Assert
@@ -22,7 +22,7 @@ describe 'Visitante vê um fornecedor' do
       cnpj: '00000000000000', email: 'emailfake@gmail.com', product: 'Fornecedor de materiais diversos', telephone: '(11) 00000-0000')
 
     # Act
-    visit root_path
+    visit providers_path
     click_on 'Fornecedor X'
     click_on 'Voltar'
 

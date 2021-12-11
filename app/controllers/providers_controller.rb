@@ -1,4 +1,8 @@
 class ProvidersController < ApplicationController
+  def index
+    @provider = Provider.all
+  end
+
   def show
     @provider = Provider.find(params[:id])
   end
