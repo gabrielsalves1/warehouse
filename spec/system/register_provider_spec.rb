@@ -26,7 +26,7 @@ describe 'Visitante registra um fornecedor' do
     click_on 'Cadastrar novo fornecedor'
     fill_in 'Nome Fantasia', with: 'Fornecedora Bom Jesus'
     fill_in 'Razão Social', with: 'Fornecedora Bom Jesus'
-    fill_in 'CNPJ', with: '07.699.939/0001-35'
+    fill_in 'CNPJ', with: '07699939000135'
     fill_in 'E-mail', with: 'fornecbomjesus@gmail.com'
     fill_in 'Produto', with: 'Fornecedor de Bebidas'
     fill_in 'Telefone', with: '(11) 00000-0000'
@@ -34,7 +34,7 @@ describe 'Visitante registra um fornecedor' do
 
     #Assert
     expect(page).to have_css('h1', text: 'Fornecedora Bom Jesus')
-    expect(page).to have_content('07.699.939/0001-35')
+    expect(page).to have_content('07699939000135')
     expect(page).to have_content('fornecbomjesus@gmail.com')
     expect(page).to have_content('Fornecedor de Bebidas')
     expect(page).to have_content('(11) 00000-0000')
@@ -53,6 +53,51 @@ describe 'Visitante registra um fornecedor' do
     #Assert
     expect(page).to have_content 'Não foi possível gravar o fornecedor'
     expect(page).to have_content 'CNPJ não pode ficar em branco'
+  end
 
+  it 'e não cadastra pois o CNPJ é inválido' do
+    #Arrange
+
+    #Act
+    visit root_path
+    click_on 'Cadastrar novo fornecedor'
+    fill_in 'Nome Fantasia', with: 'Fornecedora Bom Jesus'
+    fill_in 'Razão Social', with: 'Fornecedora Bom Jesus'
+    fill_in 'CNPJ', with: '076999390001351234'
+    fill_in 'E-mail', with: 'fornecbomjesus@gmail.com'
+    fill_in 'Produto', with: 'Fornecedor de Bebidas'
+    fill_in 'Telefone', with: '(11) 00000-0000'
+    click_on 'Gravar'
+
+    #Assert
+    expect(page).to have_content('Preencha somente os 14 números do CNPJ')
+  end
+
+  it 'e não cadastra CNPJ duplicado' do
+    #Arrange
+
+    #Act
+    visit root_path
+    click_on 'Cadastrar novo fornecedor'
+    fill_in 'Nome Fantasia', with: 'Fornecedora Bom Jesus'
+    fill_in 'Razão Social', with: 'Fornecedora Bom Jesus'
+    fill_in 'CNPJ', with: '07699939000135'
+    fill_in 'E-mail', with: 'fornecbomjesus@gmail.com'
+    fill_in 'Produto', with: 'Fornecedor de Bebidas'
+    fill_in 'Telefone', with: '(11) 00000-0000'
+    click_on 'Gravar'
+
+    visit root_path
+    click_on 'Cadastrar novo fornecedor'
+    fill_in 'Nome Fantasia', with: 'Fornecedora Bom Jesus'
+    fill_in 'Razão Social', with: 'Fornecedora Bom Jesus'
+    fill_in 'CNPJ', with: '07699939000135'
+    fill_in 'E-mail', with: 'fornecbomjesus@gmail.com'
+    fill_in 'Produto', with: 'Fornecedor de Bebidas'
+    fill_in 'Telefone', with: '(11) 00000-0000'
+    click_on 'Gravar'
+
+    #Assert
+    expect(page).to have_content('CNPJ duplicado')
   end
 end

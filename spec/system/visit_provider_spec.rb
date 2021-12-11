@@ -3,8 +3,8 @@ require 'rails_helper'
 describe 'Visitante vê um fornecedor' do
   it 'e vê todos dados cadastrados' do
     #Arrange -> preparar o banco
-    Provider.create(fantasy_name: 'Fornecedor X', corporate_name: 'Fornecedor X',
-                    cnpj: '0000000000000', email: 'emailfake@gmail.com', product: 'Fornecedor de materiais diversos', telephone: '(11) 00000-0000')
+    Provider.create(fantasy_name: 'Fornecedor X', corporate_name: 'Fornecedor X', cnpj: '00000000000000',
+                    email: 'emailfake@gmail.com', product: 'Fornecedor de materiais diversos', telephone: '(11) 00000-0000')
 
     #Act
     visit root_path
@@ -19,7 +19,7 @@ describe 'Visitante vê um fornecedor' do
   it 'e consegue voltar para a tela inicial' do
     # Arrange
     Provider.create(fantasy_name: 'Fornecedor X', corporate_name: 'Fornecedor X',
-      cnpj: '0000000000000', email: 'emailfake@gmail.com', product: 'Fornecedor de materiais diversos', telephone: '(11) 00000-0000')
+      cnpj: '00000000000000', email: 'emailfake@gmail.com', product: 'Fornecedor de materiais diversos', telephone: '(11) 00000-0000')
 
     # Act
     visit root_path
