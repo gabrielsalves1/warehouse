@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Visitante registra galpão' do
-  it 'através de um link na tela inicial' do
+  it 'através de um link na tela inicial e contém os campos' do
     #Arrange
 
     #Act
