@@ -1,0 +1,10 @@
+
+<h2>Fornecedores cadastrados</h2>
+
+<% if @supplier.empty? %>
+    Nenhum fornecedor cadastrado
+<% else %>
+    <% @supplier.each do |p|%>
+        <%= link_to(p.fantasy_name, supplier_path(p.id)) %>
+    <% end %>
+<% end %>

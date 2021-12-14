@@ -1,22 +1,22 @@
 <h1>Novo Fornecedor</h1>
-<% if @provider.errors %>
+<% if @supplier.errors %>
   <span>Verifique os campos abaixo:</span>
   <ul>
-<% @provider.errors.full_messages.each do |msg| %>
+<% @supplier.errors.full_messages.each do |msg| %>
     <li><%= msg %></li>
 <% end %>
   </ul>
 <% end %>
 
-<%= form_with(model: @provider) do |form| %>
+<%= form_with(model: @supplier) do |form| %>
   <div>
     <%= form.label :fantasy_name, 'Nome Fantasia' %>
     <%= form.text_field(:fantasy_name) %>
   <div>
 
   <div>
-    <%= form.label :corporate_name, 'Razão Social' %>
-    <%= form.text_field(:corporate_name) %>
+    <%= form.label :legal_name, 'Razão Social' %>
+    <%= form.text_field(:legal_name) %>
   <div>
 
   <div>
