@@ -17,13 +17,12 @@ describe 'Visitante registra um fornecedor' do
     expect(page).to have_field 'Produto'
     expect(page).to have_field 'Telefone'
   end
-
+  
   it 'com sucesso' do
     #Arrange
 
     #Act
-    visit root_path
-    click_on 'Cadastrar novo fornecedor'
+    visit new_supplier_path
     fill_in 'Nome Fantasia', with: 'Fornecedora Bom Jesus'
     fill_in 'Razão Social', with: 'Fornecedora Bom Jesus'
     fill_in 'CNPJ', with: '07699939000135'
@@ -44,8 +43,7 @@ describe 'Visitante registra um fornecedor' do
     #Arrange
 
     #Act
-    visit root_path
-    click_on 'Cadastrar novo fornecedor'
+    visit new_supplier_path
     fill_in 'Nome Fantasia', with: ''
     fill_in 'CNPJ', with: ''
     click_on 'Gravar'
@@ -59,8 +57,7 @@ describe 'Visitante registra um fornecedor' do
     #Arrange
 
     #Act
-    visit root_path
-    click_on 'Cadastrar novo fornecedor'
+    visit new_supplier_path
     fill_in 'Nome Fantasia', with: 'Fornecedora Bom Jesus'
     fill_in 'Razão Social', with: 'Fornecedora Bom Jesus'
     fill_in 'CNPJ', with: '076999390001351234'
@@ -75,20 +72,11 @@ describe 'Visitante registra um fornecedor' do
 
   it 'e não cadastra CNPJ duplicado' do
     #Arrange
+    Supplier.create(fantasy_name: 'Fornecedora Bom Jesus', legal_name: 'Fornecedora Bom Jesus', cnpj: '07699939000135',
+                    email: 'fornecbomjesus@gmail.com', product: 'Fornecedor de Bebidas', telephone: '(11) 00000-0000')
 
     #Act
-    visit root_path
-    click_on 'Cadastrar novo fornecedor'
-    fill_in 'Nome Fantasia', with: 'Fornecedora Bom Jesus'
-    fill_in 'Razão Social', with: 'Fornecedora Bom Jesus'
-    fill_in 'CNPJ', with: '07699939000135'
-    fill_in 'E-mail', with: 'fornecbomjesus@gmail.com'
-    fill_in 'Produto', with: 'Fornecedor de Bebidas'
-    fill_in 'Telefone', with: '(11) 00000-0000'
-    click_on 'Gravar'
-
-    visit root_path
-    click_on 'Cadastrar novo fornecedor'
+    visit new_supplier_path
     fill_in 'Nome Fantasia', with: 'Fornecedora Bom Jesus'
     fill_in 'Razão Social', with: 'Fornecedora Bom Jesus'
     fill_in 'CNPJ', with: '07699939000135'
