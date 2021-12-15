@@ -2,13 +2,13 @@ require 'rails_helper'
 
 describe 'Visitante registra galpão' do
   it 'através de um link na tela inicial e contém os campos' do
-    #Arrange
+    # Arrange
 
-    #Act
+    # Act
     visit root_path
     click_on 'Cadastrar novo galpão'
 
-    #Assert
+    # Assert
     expect(page).to have_content 'Novo Galpão'
     expect(page).to have_field 'Nome'
     expect(page).to have_field 'Código'
@@ -22,9 +22,9 @@ describe 'Visitante registra galpão' do
   end
 
   it 'com sucesso' do
-    #Arrange
+    # Arrange
 
-    #Act
+    # Act
     visit root_path
     click_on 'Cadastrar novo galpão'
     fill_in 'Nome', with: 'Juiz de Fora'
@@ -38,7 +38,7 @@ describe 'Visitante registra galpão' do
     fill_in 'Área Útil', with: '3000'
     click_on 'Gravar'
 
-    #Assert
+    # Assert
     expect(page).to have_content('Juiz de Fora')
     expect(page).to have_content('JDF')
     expect(page).to have_content('Galpão registrado com sucesso')

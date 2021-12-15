@@ -52,40 +52,4 @@ describe 'Visitante registra um fornecedor' do
     expect(page).to have_content 'Não foi possível gravar o fornecedor'
     expect(page).to have_content 'CNPJ não pode ficar em branco'
   end
-
-  it 'e não cadastra pois o CNPJ é inválido' do
-    #Arrange
-
-    #Act
-    visit new_supplier_path
-    fill_in 'Nome Fantasia', with: 'Fornecedora Bom Jesus'
-    fill_in 'Razão Social', with: 'Fornecedora Bom Jesus'
-    fill_in 'CNPJ', with: '076999390001351234'
-    fill_in 'E-mail', with: 'fornecbomjesus@gmail.com'
-    fill_in 'Produto', with: 'Fornecedor de Bebidas'
-    fill_in 'Telefone', with: '(11) 00000-0000'
-    click_on 'Gravar'
-
-    #Assert
-    expect(page).to have_content('Preencha somente os 14 números do CNPJ')
-  end
-
-  it 'e não cadastra CNPJ duplicado' do
-    #Arrange
-    Supplier.create(fantasy_name: 'Fornecedora Bom Jesus', legal_name: 'Fornecedora Bom Jesus', cnpj: '07699939000135',
-                    email: 'fornecbomjesus@gmail.com', product: 'Fornecedor de Bebidas', telephone: '(11) 00000-0000')
-
-    #Act
-    visit new_supplier_path
-    fill_in 'Nome Fantasia', with: 'Fornecedora Bom Jesus'
-    fill_in 'Razão Social', with: 'Fornecedora Bom Jesus'
-    fill_in 'CNPJ', with: '07699939000135'
-    fill_in 'E-mail', with: 'fornecbomjesus@gmail.com'
-    fill_in 'Produto', with: 'Fornecedor de Bebidas'
-    fill_in 'Telefone', with: '(11) 00000-0000'
-    click_on 'Gravar'
-
-    #Assert
-    expect(page).to have_content('CNPJ duplicado')
-  end
 end

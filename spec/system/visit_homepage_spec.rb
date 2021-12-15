@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Visitante abre a tela inicial' do
-  #Cenários
+  # Cenários
   it 'e vê o menu' do
     visit root_path
 

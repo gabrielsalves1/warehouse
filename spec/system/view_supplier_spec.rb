@@ -2,25 +2,25 @@ require 'rails_helper'
 
 describe 'Visitante vê um fornecedor' do
   it 'a partir da tela inicial o link para Fornecedores' do
-    #Arrange
+    # Arrange
 
-    #Act
+    # Act
     visit root_path
 
-    #Assert
+    # Assert
     expect(page).to have_link('Fornecedores')
   end
 
   it 'e vê todos dados cadastrados' do
-    #Arrange -> preparar o banco
+    # Arrange
     Supplier.create(fantasy_name: 'Fornecedor X', legal_name: 'Fornecedor X', cnpj: '00000000000000',
                     email: 'emailfake@gmail.com', product: 'Fornecedor de materiais diversos', telephone: '(11) 00000-0000')
 
-    #Act
+    # Act
     visit suppliers_path
     click_on 'Fornecedor X'
 
-    #Assert
+    # Assert
     expect(page).to have_content('0000000000000')
     expect(page).to have_content('emailfake@gmail.com')
     expect(page).to have_content('Fornecedor de materiais diversos')
@@ -41,13 +41,13 @@ describe 'Visitante vê um fornecedor' do
   end
 
   it 'e não existem fornecedores' do
-    #Arrange
+    # Arrange
 
-    #Act
+    # Act
     visit root_path
     click_on 'Fornecedores'
 
-    #Assert
+    # Assert
     expect(page).to have_content('Nenhum fornecedor cadastrado')
   end
 end
