@@ -1,4 +1,8 @@
 class ProductModelsController < ApplicationController
+  def show
+    @product_model = ProductModel.find(params[:id])
+  end
+  
   def new
   end
   
@@ -7,7 +11,7 @@ class ProductModelsController < ApplicationController
     product_model = ProductModel.new(procut_model_params)
 
     if product_model.save()
-      redirect_to root_path, notice: 'Modelo de produto registrado com sucesso'
+      redirect_to product_model, notice: 'Modelo de produto registrado com sucesso'
     end
   end
 end
