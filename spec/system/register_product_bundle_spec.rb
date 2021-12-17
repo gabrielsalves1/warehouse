@@ -15,7 +15,7 @@ describe 'Usuário registrar um kit' do
     # Act
     visit root_path
     click_on 'Criar novo kit de produtos'
-    fill_in 'Nome', with: 'Kit Desgustação Miolo'
+    fill_in 'Nome', with: 'Kit Degustação Miolo'
     fill_in 'Código SKU', with: 'KVIN1203921'
     check 'Vinho Tinto Miolo'
     check 'Vinho Branco Miolo'
@@ -24,9 +24,7 @@ describe 'Usuário registrar um kit' do
     # Assert
     expect(page).to have_content 'Kit Degustação Miolo'
     expect(page).to have_content 'KVIN1203921'
-    expect(page).to have_content 'Vinho Tinto Miolo'
-    expect(page).to have_content 'Taça para Vinho'
     expect(page).to have_content 'Vinho Branco Miolo'
-    
+    expect(page).to have_content 'Vinho Tinto Miolo'
   end
 end

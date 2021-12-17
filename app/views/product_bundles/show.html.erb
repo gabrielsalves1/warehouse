@@ -1,6 +1,6 @@
 <h1><%= @product_bundle.name %></h1>
-SKU: <%= @product_bundle.sku %>
+SKU: <%= @product_bundle.sku %> <br/>
 
 <% @product_bundle.product_bundle_items.each do |p| %>
-  <%= p.product_model.name %>
+  <span><%= p.product_model.name %></span> <br/>
 <% end %>

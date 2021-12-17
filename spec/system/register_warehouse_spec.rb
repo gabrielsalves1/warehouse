@@ -99,4 +99,23 @@ describe 'Usuário cadastra um galpão' do
     expect(page).to have_content 'Código não pode ficar em branco'
     expect(page).to have_content 'Endereço não pode ficar em branco'
   end
+
+  it 'e edita os campos preenchidos' do
+    # Arrange
+    user = User.create!(email: 'joao@email.com', password: '12345678')
+    Warehouse.create(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão numa linda cidade',
+      address: 'Av Fernandes Lima', city: 'Maceió', state: 'AL',
+      postal_code: '57050-000', total_area: 10000, useful_area: 8000)
+
+    # Act
+    login_as(user)
+    visit root_path
+    click_on 'Maceió'
+    click_on 'Editar' 
+    fill_in 'Endereço', with: 'Rua Pascoal Leite'
+    click_on 'Gravar'
+
+    #Assert
+    expect(page).to have_content 'Rua Pascoal Leite'
+  end
 end
