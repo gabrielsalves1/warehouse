@@ -12,4 +12,17 @@ describe 'Visitante navega' do
       expect(page).to have_link('Início', href: root_path)
     end
   end
+
+  it 'e não vê opções no menu sem estar logado' do
+    # Arrange
+
+    # Act
+    visit root_path
+
+    # Assert
+    expect(page).not_to have_link('Cadastrar novo galpão')
+    expect(page).not_to have_link('Cadastrar novo fornecedor')
+    expect(page).not_to have_link('Criar novo kit de produtos')
+    expect(page).not_to have_link('Cadastrar modelo de produto')
+  end
 end

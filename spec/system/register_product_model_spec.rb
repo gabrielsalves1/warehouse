@@ -3,10 +3,12 @@ require 'rails_helper'
 describe 'Usuário cadastra um model do produto' do
   it 'com sucesso' do
     # Arrange
+    user = User.create!(email: 'joao@email.com', password: '12345678')
     Supplier.create(fantasy_name: 'Cerâmicas Geek', legal_name: 'Geek Comércio de Cerâmicas LTDA',
                     cnpj: '00000000000000', email: 'a@gmail.com', product: 'Cerâmicas')
     
     # Act
+    login_as(user)
     visit root_path
     click_on 'Cadastrar modelo de produto'
     fill_in 'Nome', with: 'Caneca Star Wars'

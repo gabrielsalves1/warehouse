@@ -1,16 +1,6 @@
 require 'rails_helper'
 
 describe 'Usuário cadastra um galpão' do
-  it 'e visitante não vê o menu' do
-    # Arrange
-
-    # Act
-    visit root_path
-
-    # Assert
-    expect(page).not_to have_link('Cadastrar novo galpão')
-  end
-
   it 'visitante não acessa diretamente o formulário' do
     # Arrange
 

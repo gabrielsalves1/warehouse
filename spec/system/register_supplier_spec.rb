@@ -3,8 +3,10 @@ require 'rails_helper'
 describe 'Visitante registra um fornecedor' do
   it 'através de um link na tela inicial' do
     #Arrange
+    user = User.create!(email: 'joao@email.com', password: '12345678')
 
     #Act
+    login_as(user)
     visit root_path
     click_on 'Cadastrar novo fornecedor'
 
@@ -20,8 +22,10 @@ describe 'Visitante registra um fornecedor' do
   
   it 'com sucesso' do
     #Arrange
+    user = User.create!(email: 'joao@email.com', password: '12345678')
 
     #Act
+    login_as(user)
     visit new_supplier_path
     fill_in 'Nome Fantasia', with: 'Fornecedora Bom Jesus'
     fill_in 'Razão Social', with: 'Fornecedora Bom Jesus'
@@ -41,8 +45,10 @@ describe 'Visitante registra um fornecedor' do
 
   it 'e todos campos são obrigatórios' do
     #Arrange
+    user = User.create!(email: 'joao@email.com', password: '12345678')
 
     #Act
+    login_as(user)
     visit new_supplier_path
     fill_in 'Nome Fantasia', with: ''
     fill_in 'CNPJ', with: ''

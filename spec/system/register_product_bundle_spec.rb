@@ -1,8 +1,9 @@
 require 'rails_helper'
 
-describe 'Usuário registrar um kit' do
+describe 'Usuário registra um kit' do
   it 'com sucesso' do
     # Arrange
+    user = User.create!(email: 'joao@email.com', password: '12345678')
     supplier = Supplier.create(fantasy_name: 'Vinícola Miolo', legal_name: 'Miolo Fábrica de Bebidas LTDA',
       cnpj: '51905325000154', email: 'contato@miolos.com', product: 'Fornecedor de Bebidas', telephone: '(11) 94102-0000')
     ProductModel.create!(name: 'Vinho Tinto Miolo', height: '30', width: '10', length: '10',
@@ -13,6 +14,7 @@ describe 'Usuário registrar um kit' do
                         weight: 800, sku: 'VINBR9208312', supplier: supplier)
                         
     # Act
+    login_as(user)
     visit root_path
     click_on 'Criar novo kit de produtos'
     fill_in 'Nome', with: 'Kit Degustação Miolo'
