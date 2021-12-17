@@ -1,11 +1,38 @@
 require 'rails_helper'
 
-describe 'Visitante registra galpão' do
-  it 'através de um link na tela inicial e contém os campos' do
+describe 'Usuário cadastra um galpão' do
+  it 'e visitante não vê o menu' do
     # Arrange
 
     # Act
     visit root_path
+
+    # Assert
+    expect(page).not_to have_link('Cadastrar novo galpão')
+  end
+
+  it 'visitante não acessa diretamente o formulário' do
+    # Arrange
+
+    # Act
+    visit new_warehouse_path
+
+    # Assert
+    expect(current_path).to eq new_user_session_path 
+  end
+
+  it 'através de um link na tela inicial e contém os campos' do
+    # Arrange
+    User.create!(email: 'joao@email.com', password: '12345678')
+
+    # Act
+    visit root_path
+    click_on 'Entrar'
+    within('form#new_user') do
+      fill_in 'E-mail', with: 'joao@email.com'
+      fill_in 'Senha', with: '12345678'
+      click_on 'Criar Usuário'
+    end
     click_on 'Cadastrar novo galpão'
 
     # Assert
@@ -23,8 +50,10 @@ describe 'Visitante registra galpão' do
 
   it 'com sucesso' do
     # Arrange
+    user = User.create!(email: 'joao@email.com', password: '12345678')
 
     # Act
+    login_as(user)
     visit root_path
     click_on 'Cadastrar novo galpão'
     fill_in 'Nome', with: 'Juiz de Fora'
@@ -52,8 +81,10 @@ describe 'Visitante registra galpão' do
 
   it 'e todos campos são obrigatórios' do
     # Arrange
+    user = User.create!(email: 'joao@email.com', password: '12345678')
 
     # Act
+    login_as(user)
     visit root_path
     click_on 'Cadastrar novo galpão'
     fill_in 'Nome', with: ''
