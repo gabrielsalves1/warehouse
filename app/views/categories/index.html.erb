@@ -1,0 +1,9 @@
+<h2>Categorias cadastradas</h2>
+
+<% if @category.empty? %>
+    Nenhuma categoria cadastrada
+<% else %>
+    <% @category.each do |c|%>
+        <%= link_to(c.name, category_path(c.id)) %>
+    <% end %>
+<% end %>

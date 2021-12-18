@@ -4,8 +4,9 @@ describe 'Usuário cadastra um model do produto' do
   it 'com sucesso' do
     # Arrange
     user = User.create!(email: 'joao@email.com', password: '12345678')
-    Supplier.create(fantasy_name: 'Cerâmicas Geek', legal_name: 'Geek Comércio de Cerâmicas LTDA',
+    Supplier.create!(fantasy_name: 'Cerâmicas Geek', legal_name: 'Geek Comércio de Cerâmicas LTDA',
                     cnpj: '00000000000000', email: 'a@gmail.com', product: 'Cerâmicas')
+    Category.create!(name: 'Geek')
     
     # Act
     login_as(user)
@@ -17,8 +18,8 @@ describe 'Usuário cadastra um model do produto' do
     fill_in 'Largura', with: '8'
     fill_in 'Profundidade', with: '14'
     fill_in 'Código SKU', with: 'CN203040ABC'
-    save_page
     select 'Cerâmicas Geek', from: 'Fornecedor'
+    select 'Geek', from: 'Categoria'
     click_on 'Gravar'
 
     # Assert
@@ -28,5 +29,6 @@ describe 'Usuário cadastra um model do produto' do
     expect(page).to have_content 'Dimensões: 12 x 8 x 14'
     expect(page).to have_content 'SKU: CN203040ABC'
     expect(page).to have_content 'Cerâmicas Geek'
+    expect(page).to have_content 'Geek'
   end
 end

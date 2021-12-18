@@ -4,14 +4,15 @@ describe 'Usuário registra um kit' do
   it 'com sucesso' do
     # Arrange
     user = User.create!(email: 'joao@email.com', password: '12345678')
-    supplier = Supplier.create(fantasy_name: 'Vinícola Miolo', legal_name: 'Miolo Fábrica de Bebidas LTDA',
+    supplier = Supplier.create!(fantasy_name: 'Vinícola Miolo', legal_name: 'Miolo Fábrica de Bebidas LTDA',
       cnpj: '51905325000154', email: 'contato@miolos.com', product: 'Fornecedor de Bebidas', telephone: '(11) 94102-0000')
+    category = Category.create!(name: 'Vinho')
     ProductModel.create!(name: 'Vinho Tinto Miolo', height: '30', width: '10', length: '10',
-                        weight: 800, sku: 'VINTI9208312', supplier: supplier)
+                        weight: 800, sku: 'VINTI9208312', supplier: supplier, category: category)
     ProductModel.create!(name: 'Taça para Vinho', height: '12', width: '10', length: '10',
-                        weight: 50, sku: 'TAC9104352', supplier: supplier)
+                        weight: 50, sku: 'TAC9104352', supplier: supplier, category: category)
     ProductModel.create!(name: 'Vinho Branco Miolo', height: '30', width: '10', length: '10',
-                        weight: 800, sku: 'VINBR9208312', supplier: supplier)
+                        weight: 800, sku: 'VINBR9208312', supplier: supplier, category: category)
                         
     # Act
     login_as(user)
