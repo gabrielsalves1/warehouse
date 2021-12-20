@@ -31,4 +31,26 @@ describe 'Usuário cadastra um model do produto' do
     expect(page).to have_content 'Cerâmicas Geek'
     expect(page).to have_content 'Geek'
   end
+
+  it 'e consegue editar com sucesso' do
+    # Arrange
+    user = User.create!(email: 'joao@email.com', password: '12345678')
+    s = Supplier.create!(fantasy_name: 'Cerâmicas Geek', legal_name: 'Geek Comércio de Cerâmicas LTDA',
+                    cnpj: '00000000000000', email: 'a@gmail.com', product: 'Cerâmicas')
+    c = Category.create!(name: 'Geek')
+    ProductModel.create!(name: 'Lego', weight: '10', height: '10', length: '5', width: '5', supplier: s, category: c)
+    
+    # Act
+    login_as(user)
+    visit root_path
+    click_on 'Fornecedores'
+    click_on 'Cerâmicas Geek'
+    click_on 'Lego'
+    click_on 'Editar'
+    fill_in 'Nome', with: 'Lego Marvel'
+    click_on 'Gravar'
+
+    # Assert
+    expect(page).to have_content 'Lego Marvel'
+  end
 end

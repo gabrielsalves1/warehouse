@@ -30,7 +30,7 @@
 
   <% @supplier.product_models.each do |p| %>
   <tr>
-    <td><%= p.name %></td>
+    <td><%= link_to(p.name, product_model_path) %></td>
     <td><%= p.sku %></td>
   </tr>
   <% end %>
