@@ -6,6 +6,7 @@ class ProductModelsController < ApplicationController
   end
   
   def new
+    @product_model = ProductModel.new
   end
   
   def create

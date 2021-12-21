@@ -1,45 +1,56 @@
 <h1>Cadastrar Modelo de Produto</h1>
 
-<%= form_with(model: ProductModel.new) do |f| %>
-  <div>
+<% if @product_model.errors %>
+  <div class="alert alert-danger">
+    <span>Verifique os campos abaixo:</span>
+    <ul>
+      <% @product_model.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with(model: @product_model) do |f| %>
+  <div class="form-group">
     <%= f.label :name, 'Nome' %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: "form-control" %>
   </div>
   
-  <div>
+  <div class="form-group">
     <%= f.label :weight, 'Peso' %>
-    <%= f.text_field :weight %>
+    <%= f.text_field :weight, class: "form-control" %>
   </div>
   
-  <div>
+  <div class="form-group">
     <%= f.label :height, 'Altura' %>
-    <%= f.text_field :height %>
+    <%= f.text_field :height, class: "form-control" %>
   </div>
   
-  <div>
+  <div class="form-group">
     <%= f.label :width, 'Largura' %>
-    <%= f.text_field :width %>
+    <%= f.text_field :width, class: "form-control" %>
   </div>
   
-  <div>
+  <div class="form-group">
     <%= f.label :length, 'Profundidade' %>
-    <%= f.text_field :length %>
+    <%= f.text_field :length, class: "form-control" %>
   </div>
   
-  <div>
+  <div class="form-group">
     <%= f.label :sku, 'Código SKU' %>
-    <%= f.text_field :sku %>
+    <%= f.text_field :sku, class: "form-control" %>
   </div>
   
-  <div>
+  <div class="form-group">
     <%= f.label :supplier_id, 'Fornecedor' %>
-    <%= f.collection_select(:supplier_id, Supplier.all, :id, :fantasy_name) %>
+    <%= f.collection_select(:supplier_id, Supplier.all, :id, :fantasy_name, class: "form-control") %>
   </div>
 
-  <div>
+  <div class="form-group">
     <%= f.label :category_id, 'Categoria' %>
-    <%= f.collection_select(:category_id, Category.all, :id, :name) %>
+    <%= f.collection_select(:category_id, Category.all, :id, :name, class: "form-control") %>
   </div>
 
-  <%= f.submit 'Gravar' %>
+  <%= f.submit 'Gravar', class: 'btn btn-primary' %>
 <% end %>

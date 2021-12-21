@@ -4,6 +4,6 @@
     Nenhuma categoria cadastrada
 <% else %>
     <% @category.each do |c|%>
-        <%= link_to(c.name, category_path(c.id)) %>
+        <%= link_to(c.name, category_path(c.id)) %> <br/>
     <% end %>
 <% end %>

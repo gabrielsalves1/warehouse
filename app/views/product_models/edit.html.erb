@@ -9,45 +9,45 @@
 <% end %>
 
 <%= form_with(model: @product_model) do |f| %>
-  <div>
+  <div class="form-group">
     <%= f.label :name, 'Nome' %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: "form-control" %>
   </div>
   
-  <div>
+  <div class="form-group">
     <%= f.label :weight, 'Peso' %>
-    <%= f.text_field :weight %>
+    <%= f.text_field :weight, class: "form-control" %>
   </div>
   
-  <div>
+  <div class="form-group">
     <%= f.label :height, 'Altura' %>
-    <%= f.text_field :height %>
+    <%= f.text_field :height, class: "form-control" %>
   </div>
   
-  <div>
+  <div class="form-group">
     <%= f.label :width, 'Largura' %>
-    <%= f.text_field :width %>
+    <%= f.text_field :width, class: "form-control" %>
   </div>
   
-  <div>
+  <div class="form-group">
     <%= f.label :length, 'Profundidade' %>
-    <%= f.text_field :length %>
+    <%= f.text_field :length, class: "form-control" %>
   </div>
   
-  <div>
+  <div class="form-group">
     <%= f.label :sku, 'Código SKU' %>
-    <%= f.text_field :sku %>
+    <%= f.text_field :sku, class: "form-control" %>
   </div>
   
-  <div>
+  <div class="form-group">
     <%= f.label :supplier_id, 'Fornecedor' %>
     <%= f.collection_select(:supplier_id, Supplier.all, :id, :fantasy_name) %>
   </div>
 
-  <div>
+  <div class="form-group">
     <%= f.label :category_id, 'Categoria' %>
     <%= f.collection_select(:category_id, Category.all, :id, :name) %>
   </div>
 
-  <%= f.submit 'Gravar' %>
+  <%= f.submit 'Gravar', class: 'btn btn-primary' %>
 <% end %>

@@ -38,7 +38,7 @@ describe 'Usuário cadastra um model do produto' do
     s = Supplier.create!(fantasy_name: 'Cerâmicas Geek', legal_name: 'Geek Comércio de Cerâmicas LTDA',
                     cnpj: '00000000000000', email: 'a@gmail.com', product: 'Cerâmicas')
     c = Category.create!(name: 'Geek')
-    ProductModel.create!(name: 'Lego', weight: '10', height: '10', length: '5', width: '5', supplier: s, category: c)
+    ProductModel.create!(name: 'Lego', weight: '10', height: '10', length: '5', width: '5', sku: 'L10314567', supplier: s, category: c)
     
     # Act
     login_as(user)

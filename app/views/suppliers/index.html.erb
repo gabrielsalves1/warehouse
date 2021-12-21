@@ -5,6 +5,6 @@
     Nenhum fornecedor cadastrado
 <% else %>
     <% @supplier.each do |p|%>
-        <%= link_to(p.fantasy_name, supplier_path(p.id)) %>
+        <%= link_to(p.fantasy_name, supplier_path(p.id)) %> <br/>
     <% end %>
 <% end %>
