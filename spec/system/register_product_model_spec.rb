@@ -17,7 +17,7 @@ describe 'Usuário cadastra um model do produto' do
     fill_in 'Altura', with: '12'
     fill_in 'Largura', with: '8'
     fill_in 'Profundidade', with: '14'
-    fill_in 'Código SKU', with: 'CN203040ABC'
+    fill_in 'Código SKU', with: 'CAN54345226542823801'
     select 'Cerâmicas Geek', from: 'Fornecedor'
     select 'Geek', from: 'Categoria'
     click_on 'Gravar'
@@ -27,7 +27,7 @@ describe 'Usuário cadastra um model do produto' do
     expect(page).to have_content 'Caneca Star Wars'
     expect(page).to have_content '300 gramas'
     expect(page).to have_content 'Dimensões: 12 x 8 x 14'
-    expect(page).to have_content 'SKU: CN203040ABC'
+    expect(page).to have_content 'SKU: CAN5434522654282380'
     expect(page).to have_content 'Cerâmicas Geek'
     expect(page).to have_content 'Geek'
   end
@@ -38,7 +38,7 @@ describe 'Usuário cadastra um model do produto' do
     s = Supplier.create!(fantasy_name: 'Cerâmicas Geek', legal_name: 'Geek Comércio de Cerâmicas LTDA',
                     cnpj: '00000000000000', email: 'a@gmail.com', product: 'Cerâmicas')
     c = Category.create!(name: 'Geek')
-    ProductModel.create!(name: 'Lego', weight: '10', height: '10', length: '5', width: '5', sku: 'L10314567', supplier: s, category: c)
+    ProductModel.create!(name: 'Lego', weight: '10', height: '10', length: '5', width: '5', sku: 'LEG54345226542823801', supplier: s, category: c)
     
     # Act
     login_as(user)

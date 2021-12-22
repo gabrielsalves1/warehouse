@@ -8,25 +8,25 @@ describe 'Usuário registra um kit' do
       cnpj: '51905325000154', email: 'contato@miolos.com', product: 'Fornecedor de Bebidas', telephone: '(11) 94102-0000')
     category = Category.create!(name: 'Vinho')
     ProductModel.create!(name: 'Vinho Tinto Miolo', height: '30', width: '10', length: '10',
-                        weight: 800, sku: 'VINTI9208312', supplier: supplier, category: category)
+                        weight: 800, sku: 'VIN55438522374282384', supplier: supplier, category: category)
     ProductModel.create!(name: 'Taça para Vinho', height: '12', width: '10', length: '10',
-                        weight: 50, sku: 'TAC9104352', supplier: supplier, category: category)
+                        weight: 50, sku: 'TAC55438522374282385', supplier: supplier, category: category)
     ProductModel.create!(name: 'Vinho Branco Miolo', height: '30', width: '10', length: '10',
-                        weight: 800, sku: 'VINBR9208312', supplier: supplier, category: category)
+                        weight: 800, sku: 'VINB5438522374282386', supplier: supplier, category: category)
                         
     # Act
     login_as(user)
     visit root_path
     click_on 'Criar novo kit de produtos'
     fill_in 'Nome', with: 'Kit Degustação Miolo'
-    fill_in 'Código SKU', with: 'KVIN1203921'
+    fill_in 'Código SKU', with: 'KVIN5438522374282382'
     check 'Vinho Tinto Miolo'
     check 'Vinho Branco Miolo'
     click_on 'Gravar'
 
     # Assert
     expect(page).to have_content 'Kit Degustação Miolo'
-    expect(page).to have_content 'KVIN1203921'
+    expect(page).to have_content 'KVIN5438522374282382'
     expect(page).to have_content 'Vinho Branco Miolo'
     expect(page).to have_content 'Vinho Tinto Miolo'
   end
