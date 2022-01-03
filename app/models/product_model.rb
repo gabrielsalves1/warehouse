@@ -6,11 +6,14 @@ class ProductModel < ApplicationRecord
   validates :weight, :height, :width, :length, numericality: { greater_than: 0 }
   validates :sku, uniqueness: true
   
-  def dimensions()
+  before_save :generate_sku
+
+  def dimensions
     "#{height} x #{width} x #{length}"
   end
 
-  before_save do
+  private
+  def generate_sku
     self.sku = SecureRandom.hex(20)
   end
     
