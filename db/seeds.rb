@@ -1,7 +1,8 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+User.create!(email: 'joao@email.com', password: '12345678')
+Supplier.create!(fantasy_name: 'Vinícola Miolo', legal_name: 'Miolo Fábrica de Bebidas LTDA', cnpj: '51905325000154', email: 'contato@miolos.com', product: 'Fornecedor de Bebidas', telephone: '(11) 94102-0000')
+Supplier.create!(fantasy_name: 'Cerâmicas Geek', legal_name: 'Geek Comércio de Cerâmicas LTDA', cnpj: '00000000000000', email: 'a@gmail.com', product: 'Cerâmicas')
+Category.create!(name: 'Geek')
+Category.create!(name: 'Vinho')
+ProductModel.create!(name: 'Vinho Tinto Miolo', height: '30', width: '10', length: '10', weight: 800, supplier: supplier, category: category)
+ProductModel.create!(name: 'Taça para Vinho', height: '12', width: '10', length: '10', weight: 50, supplier: supplier, category: category)
+ProductModel.create!(name: 'Vinho Branco Miolo', height: '30', width: '10', length: '10', weight: 800, supplier: supplier, category: category)
