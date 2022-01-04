@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Usuário dá entrada em nobos itens' do
+describe 'Usuário dá entrada em novos itens' do
   it 'com sucesso' do
     # Arrange
     user = User.create(email: 'admin@email.com', password: '12345678')

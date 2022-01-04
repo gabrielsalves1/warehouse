@@ -24,6 +24,7 @@
           <%= link_to 'Criar novo kit de produtos', new_product_bundle_path, class: 'nav-link' %>
           <%= link_to 'Cadastrar modelo de produto', new_product_model_path, class: 'nav-link' %>
           <%= link_to 'Cadastrar categoria', new_category_path, class: 'nav-link' %>
+          <%= link_to 'Entrada de Itens', product_items_entry_index_path, class: 'nav-link' %>
           <%= link_to 'Sair', destroy_user_session_path, method: :delete, class: 'nav-link' %>
           Olá, <%= current_user.email %>
         <% else %>
