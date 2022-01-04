@@ -1,7 +1,0 @@
-<h1>Entrada de Itens</h1>
-
-<h2>Galpões cadastrados</h2>
-<% @warehouses.each do |w|%>
-    <%= link_to(w.name, product_items_entry_path(w.id)) %>
-    <%= w.code %> <br/>
-<% end %>

@@ -17,18 +17,19 @@ describe 'Usuário dá entrada em novos itens' do
 
     # Act
     login_as(user)
+    visit root_path
     click_on 'Entrada de Itens'
-    fill_in 'Quantidade', with: 100
-    select 'MCZ', from: 'Galpão Destino'
+    select 'Maceió', from: 'Galpão Destino'
     select 'Pelúcia Dumbo', from: 'Produto'
+    fill_in 'Quantidade', with: 100
     click_on 'Confirmar'
 
     # Assert
     expect(current_path).to eq warehouse_path(warehouse.id)
     expect(page).to have_css('h2', text: 'Estoque')
-    within("div#product-#{p1.id}")
-    expect(page).to have_content('Pelúcia Dumbo')
-    expect(page).to have_content('Quantidade: 100')
-
+    within("div#product-#{p1.id}") do
+      expect(page).to have_content('Pelúcia Dumbo')
+      expect(page).to have_content('Quantidade: 100')
+    end
   end
 end
