@@ -4,6 +4,7 @@ class ProductModel < ApplicationRecord
   has_many :product_bundle_items
   has_many :product_model_items
   has_many :product_items
+  has_many :warehouses
   validates :name, :weight, :height, :width, :length, presence: true
   validates :weight, :height, :width, :length, numericality: { greater_than: 0 }
   validates :sku, uniqueness: true

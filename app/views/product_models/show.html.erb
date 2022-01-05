@@ -1,9 +1,21 @@
 <h1><%= @product_model.name %></h1>
 
-<%= @product_model.weight %> gramas
-Dimensões: <%= @product_model.dimensions %>
-SKU: <%= @product_model.sku %> 
-Fornecedor: <%= @product_model.supplier.fantasy_name %>
-Categoria: <%= @product_model.category.name if @product_model.category %>
+<%= @product_model.weight %> gramas <br/>
+Dimensões: <%= @product_model.dimensions %> <br/>
+SKU: <%= @product_model.sku %>  <br/>
+Fornecedor: <%= @product_model.supplier.fantasy_name %> <br/>
+Categoria: <%= @product_model.category.name if @product_model.category %> <br/>
+
+<h2>Estoque</h2>
+
+<% @items = @product_model.product_items.group(:warehouse).count %> 
+<% @items.each_pair do |warehouse, quantity|%>
+
+  <div id="product-<%= warehouse.id %>">
+    <%= warehouse.name %> <br/>
+    Quantidade: <%= quantity %>
+  </div>
+
+<% end %>
 
 <%= link_to 'Editar', edit_product_model_path %>
