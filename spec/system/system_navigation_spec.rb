@@ -30,9 +30,12 @@ describe 'Visitante navega' do
     warehouse = Warehouse.create(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão numa linda cidade',
       address: 'Av Fernandes Lima', city: 'Maceió', state: 'AL',
       postal_code: '57050-000', total_area: 10000, useful_area: 8000)
-      warehouse = Warehouse.create(name: 'Guarulhos', code: 'GRU', description: 'Ótimo galpão numa linda cidade',
-        address: 'Praça 7', city: 'Guarulhos', state: 'SP',
-        postal_code: '09900-000', total_area: 10000, useful_area: 8000)
+    warehouse = Warehouse.create(name: 'Guarulhos', code: 'GRU', description: 'Ótimo galpão numa linda cidade',
+      address: 'Praça 7', city: 'Guarulhos', state: 'SP',
+      postal_code: '09900-000', total_area: 10000, useful_area: 8000)
+    warehouse = Warehouse.create(name: 'Guarulhos 2', code: 'GRU 2', description: 'Ótimo galpão numa linda cidade',
+      address: 'Praça 9', city: 'Guarulhos', state: 'SP',
+      postal_code: '09900-000', total_area: 10000, useful_area: 8000)
 
 
     visit root_path
@@ -41,5 +44,20 @@ describe 'Visitante navega' do
 
     expect(current_path).to eq search_path
     expect(page).to have_content('GRU')
+    expect(page).to have_content('GRU 2')
+    expect(page).not_to have_content('MCZ')
+  end
+
+  it 'e pesquisa por um galpão não cadastrado' do
+    warehouse = Warehouse.create(name: 'Guarulhos 2', code: 'GRU 2', description: 'Ótimo galpão numa linda cidade',
+      address: 'Praça 9', city: 'Guarulhos', state: 'SP',
+      postal_code: '09900-000', total_area: 10000, useful_area: 8000)
+
+    visit root_path
+    fill_in 'Busca:', with: 'Maranhão'
+    click_on 'Pesquisar'
+
+    expect(current_path).to eq search_path
+    expect(page).to have_content('Nenhum galpão encontrado')
   end
 end
