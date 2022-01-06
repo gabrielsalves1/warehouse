@@ -31,6 +31,14 @@
           <%= link_to 'Entrar', new_user_session_path, class: 'nav-link' %>
         <% end %>
       </nav>
+
+      <div class="search">
+        <%= form_with url: search_path, method: :get do %>
+          <%= label_tag :q, 'Busca:', class: 'form-label' %>
+          <%= text_field_tag :q %>
+          <%= submit_tag 'Pesquisar', class: 'btn btn-primary' %>
+        <% end %>
+      </div>
     </header>
     <main class="container">
       <%= flash[:notice] %>

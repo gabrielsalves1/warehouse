@@ -14,6 +14,12 @@
  *= require_self
  */
 
- .container { 
-   margin-top: 2.5em;
- }
+.container { 
+  margin-top: 2.5em;
+}
+
+.search {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}

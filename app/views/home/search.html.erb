@@ -1,0 +1,11 @@
+<h1>Resultados da busca</h1>
+
+<ul>
+  <% @warehouses.each do |warehouse| %>
+    <li>
+      <%= link_to(warehouse.name, warehouse_path(warehouse.id)) %> <br/>
+      <%= warehouse.code %>, <%= warehouse.city %>/<%= warehouse.state %> <br/>
+      <%= warehouse.description %>
+    </li>
+  <% end %>
+</ul>
