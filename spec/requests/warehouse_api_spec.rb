@@ -5,9 +5,9 @@ describe 'Warehouse API' do
     it 'com sucesso' do
       # Arrange
       Warehouse.create!(name: 'Guarulhos', code: 'GRU', description: 'Teste cadastrar galpão', address: 'Rua Teste', city: 'Guarulhos',
-        state: 'SP', postal_code: '00000-000', total_area: '3000', useful_area: '2000')
+                        state: 'SP', postal_code: '00000-000', total_area: '3000', useful_area: '2000')
       Warehouse.create!(name: 'Porto Alegre', code: 'POA', description: 'Teste cadastrar galpão', address: 'Rua Teste', city: 'Porto Alegre',
-        state: 'RS', postal_code: '00000-000', total_area: '4000', useful_area: '3500')
+                          state: 'RS', postal_code: '00000-000', total_area: '4000', useful_area: '3500')
   
       # Act
       get '/api/v1/warehouses'
@@ -33,6 +33,36 @@ describe 'Warehouse API' do
       expect(response.status).to eq 200
       expect(response.content_type).to include('application/json')
       expect(parsed_response).to eq []
+    end
+  end
+
+  context 'GET /api/v1/warehouses/:id' do
+    it 'com sucesso' do
+      # Arrange
+      warehouse = Warehouse.create!(name: 'Guarulhos', code: 'GRU', description: 'Teste cadastrar galpão', address: 'Rua Teste', city: 'Guarulhos',
+                                    state: 'SP', postal_code: '00000-000', total_area: '3000', useful_area: '2000')
+
+      # Act
+      get "/api/v1/warehouses/#{warehouse.id}"
+      
+      # Assert
+      expect(response.status).to eq 200
+      expect(response.content_type).to include('application/json')
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response["name"]).to eq 'Guarulhos'
+      expect(parsed_response["code"]).to eq 'GRU'
+      expect(parsed_response["city"]).to eq 'Guarulhos'
+      expect(parsed_response.keys).not_to include 'created_at'
+    end
+
+    it 'warehouse dont exist' do
+      # Arrange
+
+      # Act
+      get "/api/v1/warehouses/999"
+
+      # Assert
+      expect(response.status).to eq 404
     end
   end
 end
