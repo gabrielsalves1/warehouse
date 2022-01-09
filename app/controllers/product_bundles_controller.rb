@@ -13,7 +13,7 @@ class ProductBundlesController < ApplicationController
     bundle_params = params.require(:product_bundle).permit(:name, product_model_ids: [])
     @product_bundle = ProductBundle.new(bundle_params)
     @product_bundle.save
-    
+
     redirect_to @product_bundle
   end
 

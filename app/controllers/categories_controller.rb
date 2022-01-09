@@ -6,7 +6,7 @@ class CategoriesController < ApplicationController
   end
 
   def new
-    @category = Category.new 
+    @category = Category.new
   end
 
   def show
@@ -14,7 +14,7 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    category_params = params.require(:category).permit(:name)
+    category_params = params.require(:category).permit(:name, warehouse_ids: [])
     @category = Category.new(category_params)
     if @category.save
       return redirect_to @category

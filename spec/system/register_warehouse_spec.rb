@@ -40,6 +40,7 @@ describe 'Usuário cadastra um galpão' do
 
   it 'com sucesso' do
     # Arrange
+    Category.create!(name: 'Eletrodomésticos')
     user = User.create!(email: 'joao@email.com', password: '12345678')
 
     # Act
@@ -55,6 +56,7 @@ describe 'Usuário cadastra um galpão' do
     fill_in 'Descrição', with: 'Um galpão mineiro com o pé no Rio'
     fill_in 'Área Total', with: '5000'
     fill_in 'Área Útil', with: '3000'
+    check 'Eletrodomésticos'
     click_on 'Gravar'
 
     # Assert
@@ -67,6 +69,7 @@ describe 'Usuário cadastra um galpão' do
     expect(page).to have_content('Um galpão mineiro com o pé no Rio')
     expect(page).to have_content('Área Total: 5000 m2')
     expect(page).to have_content('Área Útil: 3000 m2')
+    expect(page).to have_content('Eletrodomésticos')
   end
 
   it 'e todos campos são obrigatórios' do

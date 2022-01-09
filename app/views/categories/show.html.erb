@@ -1,3 +1,9 @@
 <h1><%= @category.name %></h1>
 
-<span>Categoria: <%= @category.name %></span> <br/>
+<h2>Categoria: <%= @category.name %></h2> <br/>
+
+<p> Galpões:
+    <% @category.warehouse_categories.each do |w| %>
+      <h3><%= w.warehouse.name %></h3>
+    <% end %>
+</p> <br/>

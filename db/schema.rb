@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_05_201042) do
+ActiveRecord::Schema.define(version: 2022_01_08_204555) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -44,16 +44,6 @@ ActiveRecord::Schema.define(version: 2022_01_05_201042) do
     t.index ["warehouse_id"], name: "index_product_items_on_warehouse_id"
   end
 
-  create_table "product_model_items", force: :cascade do |t|
-    t.string "code"
-    t.integer "warehouse_id", null: false
-    t.integer "product_model_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["product_model_id"], name: "index_product_model_items_on_product_model_id"
-    t.index ["warehouse_id"], name: "index_product_model_items_on_warehouse_id"
-  end
-
   create_table "product_models", force: :cascade do |t|
     t.string "name"
     t.integer "weight"
@@ -67,17 +57,6 @@ ActiveRecord::Schema.define(version: 2022_01_05_201042) do
     t.integer "category_id", default: 0, null: false
     t.index ["category_id"], name: "index_product_models_on_category_id"
     t.index ["supplier_id"], name: "index_product_models_on_supplier_id"
-  end
-
-  create_table "providers", force: :cascade do |t|
-    t.string "fantasy_name"
-    t.string "corporate_name"
-    t.string "cnpj"
-    t.string "email"
-    t.string "product"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "telephone"
   end
 
   create_table "suppliers", force: :cascade do |t|
@@ -103,6 +82,15 @@ ActiveRecord::Schema.define(version: 2022_01_05_201042) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "warehouse_categories", force: :cascade do |t|
+    t.integer "warehouse_id", null: false
+    t.integer "category_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_warehouse_categories_on_category_id"
+    t.index ["warehouse_id"], name: "index_warehouse_categories_on_warehouse_id"
+  end
+
   create_table "warehouses", force: :cascade do |t|
     t.string "name"
     t.string "code"
@@ -121,8 +109,8 @@ ActiveRecord::Schema.define(version: 2022_01_05_201042) do
   add_foreign_key "product_bundle_items", "product_models"
   add_foreign_key "product_items", "product_models"
   add_foreign_key "product_items", "warehouses"
-  add_foreign_key "product_model_items", "product_models"
-  add_foreign_key "product_model_items", "warehouses"
   add_foreign_key "product_models", "categories"
   add_foreign_key "product_models", "suppliers"
+  add_foreign_key "warehouse_categories", "categories"
+  add_foreign_key "warehouse_categories", "warehouses"
 end

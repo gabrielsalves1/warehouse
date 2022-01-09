@@ -40,7 +40,8 @@ describe 'Visitante vê um galpão' do
 
   it 'e não vê todos detalhes do galpão' do
     # Arrange
-    Warehouse.create(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão numa linda cidade',
+    category = Category.create!(name: "Eletrônicos")
+    Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão numa linda cidade',
                       address: 'Av Fernandes Lima', city: 'Maceió', state: 'AL',
                       postal_code: '57050-000', total_area: 10000, useful_area: 8000)
 
