@@ -14,7 +14,7 @@ describe 'Usuário dá entrada em novos itens' do
       weight: 400, supplier: supplier, category: category)
     p2 = ProductModel.create!(name: 'Caneca Star Wars', height: '14', width: '10', length: '8',
             weight: 300, supplier: supplier, category: category)
-    
+
     # Act
     login_as(user)
     visit root_path
@@ -25,7 +25,7 @@ describe 'Usuário dá entrada em novos itens' do
     # Preço
     # Número do Lote
     click_on 'Confirmar'
-    
+
     # Assert
     expect(current_path).to eq warehouse_path(warehouse.id)
     expect(page).to have_css('h2', text: 'Estoque')

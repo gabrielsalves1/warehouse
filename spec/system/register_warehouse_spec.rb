@@ -8,7 +8,7 @@ describe 'Usuário cadastra um galpão' do
     visit new_warehouse_path
 
     # Assert
-    expect(current_path).to eq new_user_session_path 
+    expect(current_path).to eq new_user_session_path
   end
 
   it 'através de um link na tela inicial e contém os campos' do

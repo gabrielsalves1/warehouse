@@ -12,4 +12,16 @@ class Api::V1::WarehousesController <  Api::V1::ApiController
       render json: '{}', status: 404
     end
   end
+
+  def create
+    warehouse = Warehouse.new(name: params[:name], code: params[:code], address: params[:address], state: params[:address],
+      city: params[:city], postal_code: params[:postal_code], description: params[:description], useful_area: params[:useful_area],
+      total_area: params[:total_area], category_ids: params[:category_ids])
+
+    if warehouse.save()
+      render json: warehouse, status: 201
+    else
+      render status: 422, json: warehouse.errors.full_messages
+    end
+  end
 end

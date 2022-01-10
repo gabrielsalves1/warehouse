@@ -35,7 +35,7 @@ RSpec.describe ProductModel, type: :model do
     p1 = ProductModel.create!(name: 'Lego', weight: '10', height: '10', length: '5', width: '5', supplier: s, category: c)
     p2 = ProductModel.create!(name: 'Lego', weight: '10', height: '10', length: '5', width: '5', supplier: s, category: c)
     allow(SecureRandom).to receive(:hex).with(20).and_return 'P4L19Kp2Mz3LSNr1xgW4'
-  
+
     #Act
     p1.save()
 

@@ -22,7 +22,7 @@ describe 'Supplier API' do
       expect(response.body).not_to include 'Av Diadema'
       expect(response.body).not_to include 'Av do Aeroporto'
     end
-  
+
     it 'resposta vazia' do
       # Arrange
   
@@ -37,7 +37,7 @@ describe 'Supplier API' do
     end
   end
 
-  context 'GET /api/v1/suppliers/:id' do
+  context 'GET /api/v1/product_models/:id' do
     it 'com sucesso' do
       # Arrange
       supplier = Supplier.create!(fantasy_name: 'Fornecedor Bom Jesus', legal_name: 'Fornecedor Bom Jesus', cnpj: '00000000000100',
@@ -47,7 +47,7 @@ describe 'Supplier API' do
 
       # Act
       get "/api/v1/product_models/#{product_model.id}"
-      
+
       # Assert
       expect(response.status).to eq 200
       expect(response.content_type).to include('application/json')
@@ -58,7 +58,7 @@ describe 'Supplier API' do
       expect(parsed_response.keys).not_to include 'updated_at'
     end
 
-    it 'supplier dont exist' do
+    it 'modelo de produto não existe' do
       # Arrange
 
       # Act

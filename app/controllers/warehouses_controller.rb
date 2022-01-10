@@ -34,7 +34,7 @@ class WarehousesController < ApplicationController
       :description, :useful_area, :total_area))
       return redirect_to(warehouse_path(@warehouse.id))
     end
-    
+
     render :edit
   end
 end

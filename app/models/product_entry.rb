@@ -9,7 +9,7 @@ class ProductEntry
   def process
     warehouse = Warehouse.find(warehouse_id)
     product_model = ProductModel.find(product_model_id)
-    
+
     ProductItem.transaction do
       quantity.times do
         ProductItem.create!(warehouse: warehouse, product_model: product_model)
