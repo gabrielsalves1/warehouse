@@ -7,7 +7,7 @@ describe 'Usuário cadastra um model do produto' do
     Supplier.create!(fantasy_name: 'Cerâmicas Geek', legal_name: 'Geek Comércio de Cerâmicas LTDA',
                     cnpj: '00000000000000', email: 'a@gmail.com', product: 'Cerâmicas')
     Category.create!(name: 'Geek')
-    
+
     # Act
     login_as(user)
     visit root_path

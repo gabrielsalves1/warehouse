@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Warehouse API' do
   context 'GET /api/v1/warehouse' do
-    it 'com sucesso' do
+    it 'com sucesso - 200' do
       # Arrange
       Warehouse.create!(name: 'Guarulhos', code: 'GRU', description: 'Teste cadastrar galpão', address: 'Rua Teste', city: 'Guarulhos',
                         state: 'SP', postal_code: '00000-000', total_area: '3000', useful_area: '2000')
@@ -37,7 +37,7 @@ describe 'Warehouse API' do
   end
 
   context 'GET /api/v1/warehouses/:id' do
-    it 'com sucesso' do
+    it 'com sucesso - 200' do
       # Arrange
       warehouse = Warehouse.create!(name: 'Guarulhos', code: 'GRU', description: 'Teste cadastrar galpão', address: 'Rua Teste', city: 'Guarulhos',
                                     state: 'SP', postal_code: '00000-000', total_area: '3000', useful_area: '2000')
@@ -55,7 +55,7 @@ describe 'Warehouse API' do
       expect(parsed_response.keys).not_to include 'created_at'
     end
 
-    it 'warehouse não existe' do
+    it 'warehouse não existe - 404' do
       # Arrange
 
       # Act
@@ -63,13 +63,16 @@ describe 'Warehouse API' do
 
       # Assert
       expect(response.status).to eq 404
+      expect(response.content_type).to include('application/json')
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response["error"]).to eq 'Objeto não encontrado'
     end
   end
 
   context 'POST /api/v1/warehouses' do
     it 'com sucesso' do
       # Arrange
-      c = Category.create!(name: "Eletrônicos")
+      c = Category.create!(name: "Eletrônico")
 
       # Act
       headers = {"CONTENT_TYPE" => "application/json"}
@@ -81,7 +84,8 @@ describe 'Warehouse API' do
                                             "state": "AL",
                                             "postal_code": "57050-000",
                                             "total_area": 10000,
-                                            "useful_area": 8000 }',
+                                            "useful_area": 8000,
+                                            "category_ids": 1}',
                                  headers: headers
 
 
@@ -94,24 +98,23 @@ describe 'Warehouse API' do
     end
 
     it 'campos obrigatórios' do
-    # Arrange
-    c = Category.create!(name: "Eletrônicos")
+      # Arrange
 
-    # Act
-    headers = {"CONTENT_TYPE" => "application/json"}
-    post '/api/v1/warehouses', params: '{ "name": "Maceió",
-                                            "code": "MCZ",
-                                            "description": "Ótimo galpão numa linda cidade",
-                                            "address": "Avenida dos Galpões, 1000",
-                                            "city": "Maceió",
-                                            "state": "AL",
-                                            "postal_code": "57050-000",
-                                            "total_area": 10000}',
-                                 headers: headers
+      # Act
+      headers = {"CONTENT_TYPE" => "application/json"}
+      post '/api/v1/warehouses', params: '{ "name": "Maceió",
+                                              "code": "MCZ",
+                                              "description": "Ótimo galpão numa linda cidade",
+                                              "address": "Avenida dos Galpões, 1000",
+                                              "city": "Maceió",
+                                              "state": "AL",
+                                              "postal_code": "57050-000",
+                                              "total_area": 10000}',
+                                   headers: headers
 
-    # Assert
-    expect(response.status).to eq 422
-    expect(response.body).to include 'Área Útil não pode ficar em branco'
+      # Assert
+      expect(response.status).to eq 422
+      expect(response.body).to include 'Área Útil não pode ficar em branco'
     end
   end
 end

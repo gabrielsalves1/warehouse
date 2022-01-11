@@ -67,5 +67,22 @@ describe 'Supplier API' do
       # Assert
       expect(response.status).to eq 404
     end
+
+    it 'database error - 500' do
+      # Arrange
+      supplier = Supplier.create!(fantasy_name: 'Fornecedor Bom Jesus', legal_name: 'Fornecedor Bom Jesus', cnpj: '00000000000100',
+        email: 'bomjesus@gmail.com', product: 'Fornecedor de materiais diversos', telephone: '(11) 00000-0000')
+      category = Category.create!(name: 'Geek')
+      product_model = ProductModel.create!(name: 'Caneca', weight: '10', height: '10', length: '5', width: '5', supplier: supplier, category: category)
+      allow(ProductModel).to receive(:find).with(product_model.id.to_s).and_raise ActiveRecord::ConnectionNotEstablished
+
+      # Act
+      get("/api/v1/product_models/#{product_model.id}")
+
+      # Assert
+      expect(response.status).to eq 500
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response["error"]).to eq 'Não foi possível conectar ao banco de dados'
+    end
   end
 end
