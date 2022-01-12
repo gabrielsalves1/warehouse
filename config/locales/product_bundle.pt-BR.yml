@@ -3,5 +3,5 @@ pt-BR:
     models:
       product_bundle: Kit de Produtos
     attributes:
-      supplier:
+      product_bundle:
         name: 'Nome'

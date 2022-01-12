@@ -21,7 +21,7 @@ describe 'Supplier API' do
       expect(response.body).not_to include 'Av Diadema'
       expect(response.body).not_to include 'Av do Aeroporto'
     end
-  
+
     it 'resposta vazia' do
       # Arrange
   
@@ -64,6 +64,47 @@ describe 'Supplier API' do
 
       # Assert
       expect(response.status).to eq 404
+    end
+  end
+
+  context 'POST /api/v1/suppliers' do
+    it 'com sucesso' do
+      # Arrange
+
+      # Act
+      headers = {"CONTENT_TYPE" => "application/json"}
+      post '/api/v1/suppliers', params: '{ "fantasy_name": "Fornecedor Bom Jesus",
+                                            "legal_name": "Fornecedor Bom Jesus",
+                                            "cnpj": "00000000000100",
+                                            "email": "bomjesus@gmail.com",
+                                            "product": "Fornecedor de materiais diversos",
+                                            "telephone": "(11) 00000-0000"}',
+                                 headers: headers
+
+
+      # Assert
+      expect(response.status).to eq 201
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response["id"]).to be_a_kind_of(Integer)
+      expect(parsed_response["fantasy_name"]).to eq 'Fornecedor Bom Jesus'
+      expect(parsed_response["cnpj"]).to eq '00000000000100'
+    end
+
+    it 'campos obrigatórios' do
+      # Arrange
+
+      # Act
+      headers = {"CONTENT_TYPE" => "application/json"}
+      post '/api/v1/suppliers', params: '{ "fantasy_name": "Fornecedor Bom Jesus",
+                                            "legal_name": "Fornecedor Bom Jesus",
+                                            "email": "bomjesus@gmail.com",
+                                            "product": "Fornecedor de materiais diversos",
+                                            "telephone": "(11) 00000-0000"}',
+                                 headers: headers
+
+      # Assert
+      expect(response.status).to eq 422
+      expect(response.body).to include 'CNPJ não pode ficar em branco'
     end
   end
 end

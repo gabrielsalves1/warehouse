@@ -85,4 +85,51 @@ describe 'Supplier API' do
       expect(parsed_response["error"]).to eq 'Não foi possível conectar ao banco de dados'
     end
   end
+
+  context 'POST /api/v1/product_models' do
+    it 'com sucesso' do
+      # Arrange
+      Supplier.create!(fantasy_name: 'Fornecedor Bom Jesus', legal_name: 'Fornecedor Bom Jesus', cnpj: '00000000000100',
+        email: 'bomjesus@gmail.com', product: 'Fornecedor de materiais diversos', telephone: '(11) 00000-0000')
+      Category.create!(name: 'Geek')
+
+      # Act
+      headers = {"CONTENT_TYPE" => "application/json"}
+      post '/api/v1/product_models', params: '{ "name": "Caneca",
+                                            "weight": "10",
+                                            "height": "10",
+                                            "length": "5",
+                                            "width": "5",
+                                            "supplier_id": 1,
+                                            "category_id": 1}',
+                                 headers: headers
+
+
+      # Assert
+      expect(response.status).to eq 201
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response["id"]).to be_a_kind_of(Integer)
+      expect(parsed_response["name"]).to eq 'Caneca'
+    end
+
+    it 'campos obrigatórios' do
+      # Arrange
+      Category.create!(name: 'Geek')
+
+      # Act
+      headers = {"CONTENT_TYPE" => "application/json"}
+      post '/api/v1/product_models', params: '{ "name": "Caneca",
+                                            "weight": "10",
+                                            "height": "10",
+                                            "length": "5",
+                                            "width": "5",
+                                            "category_id": 1}',
+                                 headers: headers
+
+
+      # Assert
+      expect(response.status).to eq 422
+      expect(response.body).to include 'Fornecedor é obrigatório'
+    end
+  end
 end

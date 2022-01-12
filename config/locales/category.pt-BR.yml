@@ -3,5 +3,5 @@ pt-BR:
     models:
       category: Categoria
     attributes:
-      supplier:
+      category:
         name: 'Nome'

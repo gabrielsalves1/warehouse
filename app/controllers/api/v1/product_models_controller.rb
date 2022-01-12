@@ -10,4 +10,15 @@ class Api::V1::ProductModelsController <  Api::V1::ApiController
                                         methods: [:dimensions],
                                         include: {supplier: {except: [:created_at, :updated_at]}}), status: 200
   end
+
+  def create
+    product_model = ProductModel.new(name: 'Caneca', weight: '10', height: '10', length: '5', width: '5',
+                                    supplier_id: params[:supplier_id], category_id: params[:category_id])
+
+    if product_model.save()
+      render json: product_model, status: 201
+    else
+      render status: 422, json: product_model.errors.full_messages
+    end
+  end
 end

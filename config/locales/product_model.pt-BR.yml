@@ -3,9 +3,11 @@ pt-BR:
     models:
       product_model: Modelo de Produto
     attributes:
-      supplier:
+      product_model:
         name: 'Nome'
         weight: 'Peso'
         height: 'Altura'
         length: 'Profundidade'
         width: 'Largura'
+        supplier: 'Fornecedor'
+        category: 'Categoria'
