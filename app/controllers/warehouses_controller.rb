@@ -15,7 +15,6 @@ class WarehousesController < ApplicationController
     @warehouse = Warehouse.new(warehouse_params)
 
     if @warehouse.save()
-      #flash[:notice] = 'Galpão registrado com sucesso'
       redirect_to warehouse_path(@warehouse.id), notice: 'Galpão registrado com sucesso'
     else
       flash[:alert] = 'Não foi possível gravar o galpão'
