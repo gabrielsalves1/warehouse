@@ -10,7 +10,6 @@ Categoria: <%= @product_model.category.name if @product_model.category %> <br/>
 
 <% @items = @product_model.product_items.group(:warehouse).count %> 
 <% @items.each_pair do |warehouse, quantity|%>
-
   <div id="product-<%= warehouse.id %>">
     <%= warehouse.name %> <br/>
     Quantidade: <%= quantity %>

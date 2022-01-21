@@ -20,4 +20,18 @@ class ProductEntry
       end
     end
   end
+
+  def remove
+    warehouse = Warehouse.find(warehouse_id)
+    product_model = ProductModel.find(product_model_id)
+    product_item = ProductItem.where(warehouse: warehouse, product_model: product_model)
+    
+    product_item.limit(quantity).each do |pi|
+      ProductItem.transaction do
+        quantity.times do
+          pi.destroy
+        end
+      end
+    end
+  end
 end

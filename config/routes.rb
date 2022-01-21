@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :product_bundles, only: [:new, :create, :show]
   get 'product_items/entry', to: 'product_items#new_entry'
   post 'product_items/entry', to: 'product_items#process_entry'
+  post 'product_items/remove', to: 'product_items#process_remove'
 
   namespace :api, defaults: { format: :json }  do
     namespace :v1 do

@@ -23,11 +23,14 @@
   <% end %>
 </dl>
 
+<% if user_signed_in? %>
+  <%= link_to 'Editar', edit_warehouse_path %>
+<% end %>
+
 <h2>Estoque</h2>
 
 <% @items = @warehouse.product_items.group(:product_model).count %>
 <% @items.each_pair do |product_model, quantity|%>
-
   <div id="product-<%= product_model.id %>">
     <%= product_model.name %>
     Quantidade: <%= quantity %>
@@ -52,7 +55,21 @@
   <%= f.submit 'Confirmar', class: 'btn btn-primary' %>
 <% end %>
 
-<% if user_signed_in? %>
-  <%= link_to 'Editar', edit_warehouse_path %>
+<h2>Retirada de Estoque</h2>
+<%= form_with(url: product_items_remove_path) do |f| %>
+  <%= f.hidden_field :warehouse_id, value: @warehouse.id %>
+  <div class="form-group">
+    <%= f.label :quantity2, 'Retirada:', class: 'form-check-label' %>
+    <%= f.number_field :quantity2 %>
+  </div>
+
+  <div class="form-group form-check">
+    <%= f.label :product_model_id2, 'Retirada de Prod:', class: 'form-check-label' %><br/>
+    <%= f.collection_select :product_model_id2, ProductModel.all, :id, :name %>
+  </div>
+
+  <%= f.submit 'Confirmar retirada', class: 'btn btn-primary' %>
 <% end %>
+
+
 <%= link_to 'Voltar', root_path %>
