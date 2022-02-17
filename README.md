@@ -7,7 +7,8 @@ Este é um projeto de exercício da turma 7 do programa Quero Ser Dev da Locaweb
 # Rodar a aplicação com Docker
 
 ```
-sudo docker run -it -p 3000:3000 -v ~/workspace/warehouse-app:/app 42ed92302d54 bash
+docker-compose build
+docker-compose run --service-ports app bash
 rails s -b 0.0.0.0
 ```
 ## API
